@@ -1,0 +1,1551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Spoken English – Lessons</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+        :root {
+            --bg: #f5f7fb;
+            --card-bg: #ffffff;
+            --accent: #4f46e5;
+            --accent-soft: #eef2ff;
+            --accent-strong: #312e81;
+            --text-main: #111827;
+            --text-muted: #6b7280;
+            --bad: #b91c1c;
+            --good: #15803d;
+            --border-soft: #e5e7eb;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+                sans-serif;
+            background: radial-gradient(circle at top left, #eef2ff 0, #f9fafb 45%, #f5f7fb 100%);
+            color: var(--text-main);
+        }
+
+        .page {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 24px 16px 48px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #4f46e5, #6366f1);
+            border-radius: 24px;
+            padding: 24px 20px;
+            color: white;
+            box-shadow: 0 18px 45px rgba(15, 23, 42, 0.35);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        header h1 {
+            margin: 0 0 4px;
+            font-size: 1.8rem;
+            letter-spacing: 0.02em;
+        }
+
+        header p {
+            margin: 0;
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        .nav-tags {
+            margin-top: 14px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .nav-tags a {
+            font-size: 0.8rem;
+            padding: 6px 10px;
+            border-radius: 999px;
+            text-decoration: none;
+            color: #e0e7ff;
+            background: rgba(15, 23, 42, 0.25);
+            border: 1px solid rgba(191, 219, 254, 0.4);
+            backdrop-filter: blur(6px);
+        }
+
+        .nav-tags a:hover {
+            background: rgba(15, 23, 42, 0.5);
+        }
+
+        main {
+            margin-top: 22px;
+            display: grid;
+            grid-template-columns: minmax(0, 3fr);
+            gap: 20px;
+        }
+
+        .lesson {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 20px 18px 22px;
+            box-shadow:
+                0 14px 35px rgba(15, 23, 42, 0.14),
+                0 0 0 1px rgba(148, 163, 184, 0.12);
+            margin-bottom: 18px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .lesson::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at top right, rgba(99, 102, 241, 0.06), transparent 55%);
+            pointer-events: none;
+        }
+
+        .lesson-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
+        .lesson-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .lesson-title span.badge {
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 3px 8px;
+            border-radius: 999px;
+            background: var(--accent-soft);
+            color: var(--accent-strong);
+            border: 1px solid rgba(129, 140, 248, 0.85);
+        }
+
+        .lesson-meta {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-left: auto;
+            margin-right: 6px;
+        }
+
+        .lesson-toggle {
+            border: none;
+            background: rgba(15, 23, 42, 0.06);
+            border-radius: 999px;
+            padding: 3px 9px;
+            font-size: 0.78rem;
+            cursor: pointer;
+            color: var(--accent-strong);
+        }
+
+        .lesson-toggle:hover {
+            background: rgba(15, 23, 42, 0.12);
+        }
+
+        .lesson-content {
+            margin-top: 6px;
+        }
+
+        .lesson.collapsed .lesson-content {
+            display: none;
+        }
+
+        h3 {
+            margin-top: 16px;
+            margin-bottom: 8px;
+            font-size: 1rem;
+            color: var(--accent-strong);
+        }
+
+        h4 {
+            margin-top: 12px;
+            margin-bottom: 6px;
+        }
+
+        p {
+            margin-top: 4px;
+            margin-bottom: 6px;
+            font-size: 0.9rem;
+            line-height: 1.55;
+        }
+
+        ul, ol {
+            margin: 4px 0 8px 20px;
+            padding-left: 18px;
+            font-size: 0.9rem;
+        }
+
+        li {
+            margin-bottom: 4px;
+        }
+
+        .note {
+            padding: 8px 10px;
+            border-radius: 12px;
+            background: #eff6ff;
+            border: 1px dashed #93c5fd;
+            font-size: 0.86rem;
+        }
+
+        .examples-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 10px;
+            margin-top: 6px;
+            margin-bottom: 6px;
+        }
+
+        .example {
+            border-radius: 12px;
+            padding: 8px 10px;
+            font-size: 0.86rem;
+            border: 1px solid var(--border-soft);
+            background: #f9fafb;
+        }
+
+        .example strong {
+            display: inline-block;
+            margin-right: 4px;
+        }
+
+        .example.bad {
+            border-color: rgba(239, 68, 68, 0.7);
+            background: #fef2f2;
+        }
+
+        .example.bad strong {
+            color: var(--bad);
+        }
+
+        .example.good {
+            border-color: rgba(34, 197, 94, 0.7);
+            background: #ecfdf3;
+        }
+
+        .example.good strong {
+            color: var(--good);
+        }
+
+        .audio-panel {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 16px;
+            background: rgba(15, 23, 42, 0.02);
+            border: 1px dashed rgba(148, 163, 184, 0.6);
+        }
+
+        .audio-panel h4 {
+            margin: 0 0 6px;
+            font-size: 0.95rem;
+            color: var(--accent-strong);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .audio-panel h4 span.icon {
+            font-size: 1.05rem;
+        }
+
+        .audio-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 8px;
+        }
+
+        .audio-item {
+            padding: 8px;
+            border-radius: 12px;
+            background: #ffffff;
+            border: 1px solid rgba(203, 213, 225, 0.9);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .audio-item span.label {
+            font-size: 0.92rem;
+            font-weight: 700;
+            color: var(--accent-strong);
+            display: inline-block;
+        }
+
+        /* Styled native audio player to be touch-friendly */
+        .audio-player {
+            width: 100%;
+            min-height: 44px; /* comfortable touch target */
+            border-radius: 10px;
+            outline: none;
+            background: transparent;
+        }
+
+        .audio-actions {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .audio-download, .audio-open {
+            font-size: 0.82rem;
+            padding: 6px 8px;
+            border-radius: 8px;
+            text-decoration: none;
+            border: 1px solid rgba(148,163,184,0.6);
+            background: #fff;
+            color: var(--text-main);
+        }
+
+        .homework {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 16px;
+            background: #fefce8;
+            border: 1px solid #facc15;
+            font-size: 0.9rem;
+        }
+
+        .homework h3 {
+            color: #854d0e;
+            margin-top: 0;
+        }
+
+        .tamil {
+            font-style: italic;
+            color: var(--text-muted);
+        }
+
+        .articles-box {
+            margin-top: 6px;
+            padding: 10px;
+            border-radius: 14px;
+            background: #f1f5f9;
+            border: 1px solid #cbd5f5;
+        }
+
+        .articles-box ul {
+            margin-left: 18px;
+        }
+
+        .exercise-list li {
+            margin-bottom: 6px;
+        }
+
+        .footer-note {
+            margin-top: 28px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-align: center;
+        }
+
+        /* Tables for Day 4 */
+        .prep-title {
+            margin-top: 14px;
+            margin-bottom: 4px;
+            font-size: 0.98rem;
+            font-weight: 600;
+            color: var(--accent-strong);
+        }
+
+        table.prep-table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 8px 0 14px;
+            font-size: 0.88rem;
+            background: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        table.prep-table th,
+        table.prep-table td {
+            border: 1px solid var(--border-soft);
+            padding: 8px 10px;
+            vertical-align: top;
+        }
+
+        table.prep-table th {
+            background: #eef2ff;
+            color: var(--accent-strong);
+            text-align: left;
+        }
+
+        @media (max-width: 640px) {
+            header {
+                border-radius: 0 0 18px 18px;
+                padding: 18px 14px;
+            }
+            .page {
+                padding-inline: 10px;
+            }
+            .lesson {
+                padding-inline: 14px;
+            }
+            table.prep-table {
+                font-size: 0.8rem;
+            }
+            .audio-player { min-height: 56px; }
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+    <header>
+        <h1>Spoken English – Notes & Audio</h1>
+        <p>Have / Has · Questions · Articles · Practice & Homework</p>
+
+        <div class="nav-tags">
+            <a href="#day1">Day 1 – Have / Has</a>
+            <a href="#day3">Day 3 – Articles</a>
+            <a href="#day4">Day 4 – Practice Audio & Prepositions</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- DAY 1 -->
+        <section id="day1" class="lesson collapsed">
+            <div class="lesson-header">
+                <div class="lesson-title">
+                    Day 1 – Have, Has
+                    <span class="badge">Basics</span>
+                </div>
+                <div class="lesson-meta">Spoken English – English Partner</div>
+                <button class="lesson-toggle" type="button" aria-expanded="false">+</button>
+            </div>
+
+            <div class="lesson-content">
+                <!-- AUDIO FIRST (native players) -->
+                <div class="audio-panel">
+                    <h4><span class="icon">🔊</span>Day 1 – Audio Lessons</h4>
+                    <div class="audio-list">
+                       <!-- Single audio item (Local) -->
+<div class="audio-item">
+  <span class="label" aria-hidden="true">Day_1_1</span>
+
+  <!-- Use local audio file -->
+  <audio class="audio-player" controls preload="none" playsinline
+         aria-label="Day 1 audio 1"
+         src="audios/Day_1_1.mpeg">
+    Your browser does not support the audio element.
+  </audio>
+</div>
+
+
+                        <div class="audio-item">
+                            <span class="label" aria-hidden="true">Day_1_2</span>
+                            <audio class="audio-player" controls preload="none" playsinline aria-label="Day 1 audio 2">
+                                <source src="audios/Day_1_2.mpeg" type="audio/mpeg">
+                                Your browser does not support the audio element.
+                            </audio>
+                        </div>
+
+                        <div class="audio-item">
+                            <span class="label" aria-hidden="true">Day_1_3</span>
+                            <audio class="audio-player" controls preload="none" playsinline aria-label="Day 1 audio 3">
+                                <source src="audios/Day_1_3.mpeg" type="audio/mpeg">
+                                Your browser does not support the audio element.
+                            </audio>
+                        </div>
+
+                        <div class="audio-item">
+                            <span class="label" aria-hidden="true">Day_1_4</span>
+                            <audio class="audio-player" controls preload="none" playsinline aria-label="Day 1 audio 4">
+                                <source src="audios/Day_1_4.mpeg" type="audio/mpeg">
+                                Your browser does not support the audio element.
+                            </audio>
+                        </div>
+
+                        <div class="audio-item">
+                            <span class="label" aria-hidden="true">Day_1_5</span>
+                            <audio class="audio-player" controls preload="none" playsinline aria-label="Day 1 audio 5">
+                                <source src="audios/Day_1_5.mpeg" type="audio/mpeg">
+                                Your browser does not support the audio element.
+                            </audio>
+                        </div>
+
+                        <div class="audio-item">
+                            <span class="label" aria-hidden="true">Day_1_6</span>
+                            <audio class="audio-player" controls preload="none" playsinline aria-label="Day 1 audio 6">
+                                <source src="audios/Day_1_6.mpeg" type="audio/mpeg">
+                                Your browser does not support the audio element.
+                            </audio>
+                        </div>
+
+                        <div class="audio-item">
+                            <span class="label" aria-hidden="true">Day_1_7</span>
+                            <audio class="audio-player" controls preload="none" playsinline aria-label="Day 1 audio 7">
+                                <source src="audios/Day_1_7.mpeg" type="audio/mpeg">
+                                Your browser does not support the audio element.
+                            </audio>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TEXT BELOW AUDIO (unchanged) -->
+                <h3>Have, Has – Usage</h3>
+                <p>🎴 <strong>Have , Has இருக்கு</strong></p>
+                <p class="tamil">I , we , you , they → <strong>Have</strong><br>
+                    He , she , it , name → <strong>Has</strong></p>
+
+                <div class="examples-grid">
+                    <div class="example good">
+                        <strong>✔</strong> I have a car.
+                    </div>
+                    <div class="example good">
+                        <strong>✔</strong> He has a car.
+                    </div>
+                    <div class="example bad">
+                        <strong>❌</strong> He have a car.
+                    </div>
+                    <div class="example bad">
+                        <strong>❌</strong> I have brother.
+                    </div>
+                    <div class="example good">
+                        <strong>✔</strong> I have a brother.
+                    </div>
+                </div>
+
+                <p>More examples:</p>
+                <ul>
+                    <li>We have relatives in Cochin.</li>
+                    <li>They have a business in Dubai.</li>
+                    <li>My father has 3 sisters.</li>
+                </ul>
+
+                <h3>“Have” vs “Have got”</h3>
+
+                <p>Confusion 😇</p>
+                <p class="note">
+                    <strong>Which one is correct?</strong><br>
+                    <em>I have 2 brothers.</em> &nbsp; vs &nbsp; <em>I have got 2 brothers.</em><br><br>
+                    ✅ <strong>Both are correct</strong>
+                </p>
+
+                <div class="examples-grid">
+                    <div class="example good">
+                        <strong>✔ (formal)</strong>I have a car.
+                    </div>
+                    <div class="example good">
+                        <strong>✔ (less formal)</strong>I have got a car.
+                    </div>
+                    <div class="example good">
+                        <strong>✔</strong>He has a car.
+                    </div>
+                    <div class="example good">
+                        <strong>✔</strong>He has got a kid.
+                    </div>
+                </div>
+
+                <p>Correcting common mistakes:</p>
+                <div class="examples-grid">
+                    <div class="example bad">
+                        <strong>❌</strong>I have fever.
+                    </div>
+                    <div class="example good">
+                        <strong>✔</strong>I have a fever. (temperature)
+                    </div>
+                    <div class="example bad">
+                        <strong>❌</strong>I have headache.
+                    </div>
+                    <div class="example good">
+                        <strong>✔</strong>I have a headache.
+                    </div>
+                    <div class="example good">
+                        <strong>✔</strong>I have got a headache.
+                    </div>
+                    <div class="example good">
+                        <strong>✔</strong>She has got a headache.
+                    </div>
+                </div>
+
+                <p><strong>Sibling vocabulary (உடன்பிறப்புகள்):</strong></p>
+                <ul>
+                    <li><strong>Niece</strong> – பெண்</li>
+                    <li><strong>Nephew</strong> – ஆண்</li>
+                    <li><strong>Cousin</strong></li>
+                </ul>
+
+                <h3>Negative Forms</h3>
+
+                <p>Example sentences:</p>
+                <ul>
+                    <li>I have a car.</li>
+                    <li>He has a car.</li>
+                </ul>
+
+                <p><strong>Which one is correct?</strong></p>
+
+                <div class="examples-grid">
+                    <div class="example">
+                        I don’t have a car.
+                    </div>
+                    <div class="example">
+                        I have no car.
+                    </div>
+                </div>
+
+                <p class="note">
+                    In <strong>spoken English</strong>, we usually prefer:<br>
+                    ✅ <strong>I don’t have a car.</strong><br>
+                    ❌/✔ <strong>I have no car.</strong> (less common in speech)
+                </p>
+
+                <div class="examples-grid">
+                    <div class="example good">
+                        <strong>✔</strong>I don&apos;t have a car.
+                    </div>
+                    <div class="example good">
+                        <strong>✔</strong>I haven&apos;t got a car.
+                    </div>
+                    <div class="example good">
+                        <strong>✔</strong>I have no car. (more formal / written)
+                    </div>
+                </div>
+
+                <p>More negative examples:</p>
+                <ul>
+                    <li>He has a driving license.</li>
+                    <li class="example bad"><strong>❌</strong>He have no driving licence.</li>
+                    <li class="example"><strong>❌✔</strong> He has no driving license. (ok in some contexts, less used in spoken)</li>
+                    <li>He doesn&apos;t have a driving license. ✔</li>
+                    <li>He hasn&apos;t got a driving license. ✔</li>
+                </ul>
+
+                <p class="note">
+                    Remember: <strong>He doesn’t have</strong> ❌ <em>He doesn’t has</em>
+                </p>
+
+                <ul>
+                    <li>Fahad doesn&apos;t have a job.</li>
+                    <li>They don&apos;t have a house.</li>
+                    <li>We don&apos;t have any hope.</li>
+                    <li>My father doesn&apos;t have any job.</li>
+                </ul>
+
+                <h3>Questions with “Do / Does”</h3>
+
+                <p>🎴 <strong>Questions</strong></p>
+
+                <ul>
+                    <li>Do you have brothers?</li>
+                    <li class="example bad"><strong>❌✔</strong>You have brothers? (Spoken English)</li>
+                    <li class="example bad"><strong>❌</strong>Have you brothers?</li>
+                    <li>Have you got brothers? ✔</li>
+                </ul>
+
+                <h4>Using <code>Does</code></h4>
+                <ul>
+                    <li>He doesn&apos;t have a mobile phone. – அவனிடம் mobile phone இல்லை.</li>
+                    <li>Does he have a mobile phone? – அவனிடம் mobile phone இருக்கிறதா?</li>
+                    <li class="example bad"><strong>❌❌</strong>Has he mobile phone?</li>
+                    <li class="example bad"><strong>✔❌</strong>He has a mobile phone? (Spoken)</li>
+                    <li>Has he got a mobile phone?</li>
+                </ul>
+
+                <h4>Using <code>Do</code></h4>
+                <ul>
+                    <li>We have class tomorrow.</li>
+                    <li>We don&apos;t have class tomorrow. – நமக்கு நாளை வகுப்பு இல்லை.</li>
+                    <li>Do we have class today? ✔</li>
+                    <li class="example bad"><strong>✔❌</strong>We have class today? (Spoken)</li>
+                </ul>
+
+                <h3>“How many brothers…?”</h3>
+
+                <ul>
+                    <li>How many brothers do you have? ✔ (formal)</li>
+                    <li>How many brothers have you got? ✔ (informal)</li>
+                    <li class="example bad"><strong>✔❌</strong>How many brothers you have?</li>
+                    <li>How many brothers does he have? ✔</li>
+                    <li>How many brothers has he got? ✔</li>
+                    <li class="example bad"><strong>✔❌</strong>How many brothers he has?</li>
+                </ul>
+
+                <div class="homework">
+                    <h3>Home work</h3>
+                    <ol>
+                        <li>அவனுக்கு வேலை இல்லை. அவனுக்கு எத்தனை குழந்தைகள் இருக்கிறார்கள்?</li>
+                        <li>அவர்களுக்கு நாளை ஒரு function இருக்கிறது.</li>
+                        <li>அவருக்கு 3 குழந்தைகள் இருக்கிறார்கள்.</li>
+                        <li>எங்களுக்கு நாளை வகுப்பு இருக்கிறதா?</li>
+                        <li>அவனுக்கு work experience இருக்கிறதா?</li>
+                        <li>அவனிடம் பணம் இல்லை.</li>
+                        <li>என் அப்பாவிற்கு 3 சகோதரிகள் உள்ளனர்.</li>
+                        <li>ரஜினிகாந்த்க்கு பெண் பிள்ளைகள் இருக்கிறதா?</li>
+                        <li>Chennai silks க்கு கோயம்புத்தூரில் கிளை இருக்கிறது.</li>
+                        <li>இதற்கு 3 வருடம் warranty இருக்கிறது.</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- DAY 3 -->
+        <section id="day3" class="lesson collapsed">
+            <div class="lesson-header">
+                <div class="lesson-title">
+                    Day 3 – Articles
+                    <span class="badge">A · An · The</span>
+                </div>
+                <div class="lesson-meta">Countable / Uncountable · Rules & Exercises</div>
+                <button class="lesson-toggle" type="button" aria-expanded="false">+</button>
+            </div>
+
+            <div class="lesson-content">
+                <!-- AUDIO FIRST (native) -->
+                <div class="audio-panel">
+                    <h4><span class="icon">🔊</span>Day 3 – Article Lesson Audio</h4>
+                    <div class="audio-list">
+
+                    </div>
+                </div>
+
+                <!-- TEXT BELOW AUDIO (unchanged) -->
+                <div class="articles-box">
+                    <p><strong>Articles:</strong></p>
+                    <ul>
+                        <li>🛑 <strong>A</strong></li>
+                        <li>🛑 <strong>An</strong></li>
+                        <li>🛑 <strong>The</strong></li>
+                    </ul>
+
+                    <p>Articles are used with <strong>countable nouns</strong>.</p>
+
+                    <p class="note">
+                        <strong>Never use <em>a</em> or <em>an</em> with a word that is plural or uncountable.</strong><br><br>
+                        <span class="example bad"><strong>❌</strong> I have a cars.</span><br>
+                        <span class="example good"><strong>✔</strong> I have a car.</span><br><br>
+                        <span class="example bad"><strong>❌</strong> He loves a milk.</span><br>
+                        <span class="example good"><strong>✔</strong> He loves milk.</span>
+                    </p>
+
+                    <h3>“A” vs “An”</h3>
+                    <p><strong>An</strong> – used before words with vowel sound.</p>
+                    <p><strong>A</strong> – used before words with consonant sound.</p>
+
+                    <ul>
+                        <li>🛑 an honest man</li>
+                        <li>🛑 an hour</li>
+                        <li>🌀 a university</li>
+                        <li>🌀 a user</li>
+                    </ul>
+
+                    <h3>A / An vs The</h3>
+                    <p>
+                        <strong>A / An</strong> – used when we don't speak about a specific thing.<br>
+                        <strong>The</strong> – used when we speak about a specific thing.
+                    </p>
+
+                    <ul>
+                        <li>
+                            I caught <em>a</em> train. <br>
+                            <em>The</em> train was late.
+                        </li>
+                        <li>
+                            I was talking to <em>a</em> man. <br>
+                            <em>The</em> man was laughing.
+                        </li>
+                        <li>
+                            She gave him <em>a</em> present. <br>
+                            <em>The</em> present was expensive.
+                        </li>
+                    </ul>
+
+                    <p><strong>“The”</strong> is used when it is obvious which thing we are speaking about:</p>
+                    <ul>
+                        <li>I cleaned <strong>the</strong> bathroom this morning.</li>
+                        <li>He travelled around <strong>the</strong> world.</li>
+                        <li><strong>The</strong> sun is hot today.</li>
+                    </ul>
+                </div>
+
+                <h3>Articles – Exercise</h3>
+                <ul class="exercise-list">
+                    <li>Danny wanted _____ new bicycle for Christmas.</li>
+                    <li>Jennifer tasted _____ birthday cake her mother had made.</li>
+                    <li>The children have _____ new teacher called Mr. Green.</li>
+                    <li>All pupils must obey _____ rules.</li>
+                    <li>Dad turned on _____ radio to listen to _____ news.</li>
+                    <li>Alex is in Boston studying for _____ MBA.</li>
+                    <li>The teacher read _____ interesting article from the newspaper.</li>
+                    <li>There was _____ huge crowd of people outside the church.</li>
+                    <li>Julie talked for _____ hour about her school project.</li>
+                    <li>_____ European expert was invited to speak to the committee.</li>
+                </ul>
+
+                <p class="tamil">© English Partner</p>
+            </div>
+        </section>
+
+        <!-- DAY 4 -->
+        <section id="day4" class="lesson collapsed">
+            <div class="lesson-header">
+                <div class="lesson-title">
+                    Day 4 – Practice Audio & Prepositions
+                    <span class="badge">Listening · Grammar</span>
+                </div>
+                <div class="lesson-meta">Day 4 – Audio, Video & Preposition Tables</div>
+                <button class="lesson-toggle" type="button" aria-expanded="false">+</button>
+            </div>
+
+            <div class="lesson-content">
+                <!-- AUDIO FIRST (native players) -->
+                <div class="audio-panel">
+                    <h4><span class="icon">🎧</span>Day 4 – Audio & Video Files</h4>
+                    <div class="audio-list">
+                        <div class="audio-item">
+                            <span class="label" aria-hidden="true">Day_4_1</span>
+                            <audio class="audio-player" controls preload="none" playsinline aria-label="Day 4 audio 1">
+                                <source src="audios/Day_4_1.mpeg" type="audio/mpeg">
+                                Your browser does not support the audio element.
+                            </audio>
+                        </div>
+
+                        <div class="audio-item">
+                            <span class="label" aria-hidden="true">Day_4_2</span>
+                            <audio class="audio-player" controls preload="none" playsinline aria-label="Day 4 audio 2">
+                                <source src="audios/Day_4_2.mpeg" type="audio/mpeg">
+                                Your browser does not support the audio element.
+                            </audio>
+                        </div>
+
+                        <div class="audio-item">
+                            <span class="label" aria-hidden="true">Day_4_3</span>
+                            <audio class="audio-player" controls preload="none" playsinline aria-label="Day 4 audio 3">
+                                <source src="audios/Day_4_3.mpeg" type="audio/mpeg">
+                                Your browser does not support the audio element.
+                            </audio>
+                        </div>
+
+                        <div class="audio-item">
+                            <span class="label" aria-hidden="true">Day_4_4</span>
+                            <audio class="audio-player" controls preload="none" playsinline aria-label="Day 4 audio 4">
+                                <source src="audios/Day_4_4.mpeg" type="audio/mpeg">
+                                Your browser does not support the audio element.
+                            </audio>
+                        </div>
+
+                        <div class="audio-item">
+                            <span class="label" aria-hidden="true">Day_4_5</span>
+                            <audio class="audio-player" controls preload="none" playsinline aria-label="Day 4 audio 5">
+                                <source src="audios/Day_4_5.mpeg" type="audio/mpeg">
+                                Your browser does not support the audio element.
+                            </audio>
+                        </div>
+
+                        <div class="audio-item">
+                            <span class="label" aria-hidden="true">Day_4_6</span>
+                            <audio class="audio-player" controls preload="none" playsinline aria-label="Day 4 audio 6">
+                                <source src="audios/Day_4_6.mpeg" type="audio/mpeg">
+                                Your browser does not support the audio element.
+                            </audio>
+                        </div>
+
+                        <div class="audio-item">
+                            <span class="label" aria-hidden="true">Day_4_7</span>
+                            <audio class="audio-player" controls preload="none" playsinline aria-label="Day 4 audio 7">
+                                <source src="audios/Day_4_7.mpeg" type="audio/mpeg">
+                                Your browser does not support the audio element.
+                            </audio>
+                        </div>
+
+                        <div class="audio-item">
+                            <span class="label" aria-hidden="true">Day_4_8</span>
+                            <audio class="audio-player" controls preload="none" playsinline aria-label="Day 4 audio 8">
+                                <source src="audios/Day_4_8.mpeg" type="audio/mpeg">
+                                Your browser does not support the audio element.
+                            </audio>
+                        </div>
+                        </div>
+
+                        <div class="audio-item">
+                            <span class="label" aria-hidden="true">Day_4_9</span>
+                            <audio class="audio-player" controls preload="none" playsinline aria-label="Day 4 audio 9">
+                                <source src="audios/Day_4_9.mpeg" type="audio/mpeg">
+                                Your browser does not support the audio element.
+                            </audio>
+                        </div>
+
+                        <div class="audio-item">
+                            <span class="label" aria-hidden="true">Day_4_10</span>
+                            <audio class="audio-player" controls preload="none" playsinline aria-label="Day 4 audio 10">
+                                <source src="audios/Day_4_10.mpeg" type="audio/mpeg">
+                                Your browser does not support the audio element.
+                            </audio>
+                        </div>
+
+                        <div class="audio-item">
+                            <span class="label" aria-hidden="true">Day_4_11</span>
+                            <audio class="audio-player" controls preload="none" playsinline aria-label="Day 4 audio 11">
+                                <source src="audios/Day_4_11.mpeg" type="audio/mpeg">
+                                Your browser does not support the audio element.
+                            </audio>
+                        </div>
+
+                        <div class="audio-item">
+                            <span class="label" aria-hidden="true">Day_4_12</span>
+                            <audio class="audio-player" controls preload="none" playsinline aria-label="Day 4 audio 12">
+                                <source src="audios/Day_4_12.mpeg" type="audio/mpeg">
+                                Your browser does not support the audio element.
+                            </audio>
+                        </div>
+
+                        <div class="audio-item">
+                            <span class="label" aria-hidden="true">Day_4_13</span>
+                            <audio class="audio-player" controls preload="none" playsinline aria-label="Day 4 audio 13">
+                                <source src="audios/Day_4_13.mpeg" type="audio/mpeg">
+                                Your browser does not support the audio element.
+                            </audio>
+                        </div>
+
+                        <div class="audio-item">
+                            <span class="label" aria-hidden="true">Day_4_14</span>
+                            <audio class="audio-player" controls preload="none" playsinline aria-label="Day 4 audio 14">
+                                <source src="audios/Day_4_14.mpeg" type="audio/mpeg">
+                                Your browser does not support the audio element.
+                            </audio>
+                        </div>
+
+                        <div class="audio-item">
+                            <span class="label" aria-hidden="true">Day_4_15</span>
+                            <audio class="audio-player" controls preload="none" playsinline aria-label="Day 4 audio 15">
+                                <source src="audios/Day_4_15.mpeg" type="audio/mpeg">
+                                Your browser does not support the audio element.
+                            </audio>
+                        </div>
+
+                        <div class="audio-item">
+                            <span class="label" aria-hidden="true">Day_4_16</span>
+                            <audio class="audio-player" controls preload="none" playsinline aria-label="Day 4 audio 16">
+                                <source src="audios/Day_4_16.mpeg" type="audio/mpeg">
+                                Your browser does not support the audio element.
+                            </audio>
+                        </div>
+
+                        <div class="audio-item">
+                            <span class="label" aria-hidden="true">Day_4_17</span>
+                            <audio class="audio-player" controls preload="none" playsinline aria-label="Day 4 audio 17">
+                                <source src="audios/Day_4_17.mpeg" type="audio/mpeg">
+                                Your browser does not support the audio element.
+                            </audio>
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <!-- TEXT BELOW AUDIO: PREPOSITION TABLES (unchanged) -->
+                <div>
+                    <div class="prep-title">Preposition of Time – IN (Parts of the day, Months, Seasons, Years)</div>
+                    <table class="prep-table">
+                        <thead>
+                        <tr>
+                            <th>பயன்பாடுகள் (Usage)</th>
+                            <th>உதாரணங்கள் (Examples)</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <strong>in + Parts of the day</strong><br>
+                                in the morning<br>
+                                in the afternoon<br>
+                                in the evening
+                            </td>
+                            <td>
+                                <ul>
+                                    <li>I have my classes <strong>in the evening.</strong><br>எனக்கு மாலையில் வகுப்புகள் உள்ளன.</li>
+                                    <li>I woke up early <strong>in the morning.</strong></li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>in + Months</strong><br>
+                                in January<br>
+                                in February
+                            </td>
+                            <td>
+                                <ul>
+                                    <li>I have my exams <strong>in January.</strong><br>எனக்கு ஜனவரியில் தேர்வுகள் உள்ளன.</li>
+                                    <li>They are getting married <strong>in May.</strong></li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>in + Seasons</strong><br>
+                                in (the) spring<br>
+                                in (the) summer
+                            </td>
+                            <td>
+                                <ul>
+                                    <li>We are planning a trip to Ooty <strong>in the summer.</strong><br>கோடையில் ஊட்டிக்கு சுற்றுலா செல்ல திட்டமிட்டுள்ளோம்.</li>
+                                    <li>The sun looks bigger <strong>in winter.</strong></li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>in + Years</strong><br>
+                                in 1990<br>
+                                in 2020
+                            </td>
+                            <td>
+                                <ul>
+                                    <li>I was born <strong>in 1990.</strong><br>நான் 1990 இல் பிறந்தேன்.</li>
+                                    <li>We moved to Chennai <strong>in 2002.</strong></li>
+                                </ul>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="prep-title">Preposition of Time – IN (Decades, Centuries, Weeks, Periods, Holidays)</div>
+                    <table class="prep-table">
+                        <thead>
+                        <tr>
+                            <th>பயன்பாடுகள் (Usage)</th>
+                            <th>உதாரணங்கள் (Examples)</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <strong>in + Decades</strong><br>
+                                in the 1960s<br>
+                                in the seventies
+                            </td>
+                            <td>
+                                <ul>
+                                    <li>Our house was built <strong>in the 1960's.</strong><br>எங்கள் வீடு 1960-களில் கட்டப்பட்டது.</li>
+                                    <li>My grandmother was born <strong>in the 1920's.</strong></li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>in + Centuries</strong><br>
+                                in the 15th century<br>
+                                in the 21st century
+                            </td>
+                            <td>
+                                <ul>
+                                    <li>We are living <strong>in the 21st Century.</strong><br>நாம் 21 ஆம் நூற்றாண்டில் வாழ்கிறோம்.</li>
+                                    <li>The palace was built <strong>in the 15th century.</strong></li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>in + Weeks</strong><br>
+                                in a week<br>
+                                in 2 weeks
+                            </td>
+                            <td>
+                                <ul>
+                                    <li>I am travelling to Dubai <strong>in a week.</strong><br>நான் ஒரு வாரத்தில் துபாய்க்கு பயணம் செல்கிறேன்.</li>
+                                    <li>My classes will start <strong>in 2 weeks.</strong></li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>in + Periods of time</strong><br>
+                                in the past<br>
+                                in the next century<br>
+                                in the future<br>
+                                in the middle ages<br>
+                                in a moment
+                            </td>
+                            <td>
+                                <ul>
+                                    <li>I will call you back <strong>in a moment.</strong><br>சிறிது நேரத்தில் உங்களை மீண்டும் அழைக்கிறேன்.</li>
+                                    <li><strong>In the past</strong> online learning was not possible.</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>in + Holidays</strong> (காலத்தில்)<br>
+                                in the Easter holiday<br>
+                                in the summer vacation
+                            </td>
+                            <td>
+                                <ul>
+                                    <li>Where did you go <strong>in the summer vacation?</strong><br>கோடைவிடுமுறையில் எங்கு சென்றீர்கள்?</li>
+                                    <li>We are planning to visit our grandparents <strong>in the Easter holidays.</strong></li>
+                                </ul>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="prep-title">Preposition of Time – ON</div>
+                    <table class="prep-table">
+                        <thead>
+                        <tr>
+                            <th>பயன்பாடுகள் (Usage)</th>
+                            <th>உதாரணங்கள் (Examples)</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <strong>on + Specific days</strong><br>
+                                on my birthday<br>
+                                on my wedding day<br>
+                                on that day
+                            </td>
+                            <td>
+                                <ul>
+                                    <li>It was raining heavily <strong>on that day.</strong><br>அன்று கனமழை பெய்து கொண்டிருந்தது.</li>
+                                    <li>My brother gifted this dress <strong>on my birthday.</strong></li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>on + Time</strong><br>
+                                on the weekend (U.S.)<br>
+                                on weekdays<br>
+                                on time
+                            </td>
+                            <td>
+                                <ul>
+                                    <li>We reached the venue <strong>on time.</strong><br>நாங்கள் சரியான நேரத்தில் இடத்தை அடைந்தோம்.</li>
+                                    <li>This shop is open only <strong>on weekends.</strong></li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>on + Day + Parts of day</strong><br>
+                                on Sunday morning(s)<br>
+                                on Friday afternoon(s)<br>
+                                on Monday evening(s)
+                            </td>
+                            <td>
+                                <ul>
+                                    <li>I wake up late <strong>on Sundays.</strong><br>ஞாயிற்றுக்கிழமைகளில் நான் தாமதமாக எழுவேன்.</li>
+                                    <li>We have a meeting <strong>on Monday evening.</strong></li>
+                                </ul>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="prep-title">Preposition of Place – IN</div>
+                    <table class="prep-table">
+                        <thead>
+                        <tr>
+                            <th>பயன்பாடுகள் (Usage)</th>
+                            <th>உதாரணங்கள் (Examples)</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <strong>in + Countries</strong><br>
+                                in India<br>
+                                in America
+                            </td>
+                            <td>
+                                <ul>
+                                    <li>I live <strong>in India.</strong><br>நான் இந்தியாவில் வசிக்கிறேன்.</li>
+                                    <li>She lives <strong>in Canada.</strong></li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>in + Cities</strong><br>
+                                in Madurai<br>
+                                in Chennai
+                            </td>
+                            <td>
+                                <ul>
+                                    <li>He lives <strong>in Chennai.</strong><br>அவர் சென்னையில் வசிக்கிறார்.</li>
+                                    <li>Our office is <strong>in Coimbatore.</strong></li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>in + Neighbourhood</strong><br>
+                                in T Nagar<br>
+                                in ECR
+                            </td>
+                            <td>
+                                <ul>
+                                    <li>There is a good restaurant <strong>in Velachery.</strong><br>வேளச்சேரியில் நல்ல உணவகம் ஒன்று உள்ளது.</li>
+                                    <li>I love to do shopping <strong>in T Nagar.</strong></li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>in + Enclosed Space</strong><br>
+                                in a traffic jam<br>
+                                in a building<br>
+                                in a car
+                            </td>
+                            <td>
+                                <ul>
+                                    <li>The keys are <strong>in my car.</strong><br>சாவிகள் என் காரில் உள்ளன.</li>
+                                    <li>We got stuck <strong>in the traffic jam</strong> for 2 hours.</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="prep-title">Preposition of Place – ON</div>
+                    <table class="prep-table">
+                        <thead>
+                        <tr>
+                            <th>பயன்பாடுகள் (Usage)</th>
+                            <th>உதாரணங்கள் (Examples)</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <strong>on + Means of transport</strong><br>
+                                on a bus<br>
+                                on a train<br>
+                                on a plane
+                            </td>
+                            <td>
+                                <ul>
+                                    <li>I am <strong>on the plane</strong>, will call you back.<br>நான் விமானத்தில் இருக்கிறேன், உங்களை பின்னர் அழைப்பேன்.</li>
+                                    <li>We got <strong>on a train</strong> and went to Bangalore.</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>on + Communications</strong><br>
+                                on the radio<br>
+                                on the television<br>
+                                on the phone<br>
+                                on the internet
+                            </td>
+                            <td>
+                                <ul>
+                                    <li>We watched a movie <strong>on the television.</strong><br>நாங்கள் தொலைக்காட்சியில் ஒரு திரைப்படத்தை பார்த்தோம்.</li>
+                                    <li>She is <strong>on the phone.</strong></li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>on + Social Media</strong><br>
+                                on WhatsApp<br>
+                                on Instagram<br>
+                                on Facebook
+                            </td>
+                            <td>
+                                <ul>
+                                    <li>I will message you <strong>on WhatsApp.</strong><br>நான் உங்களுக்கு வாட்ஸ்அப்பில் செய்தி அனுப்புகிறேன்.</li>
+                                    <li>They have posted a reel <strong>on Instagram.</strong></li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>on + Surfaces</strong><br>
+                                on a table<br>
+                                on a wall<br>
+                                on the floor<br>
+                                on the roof
+                            </td>
+                            <td>
+                                <ul>
+                                    <li>Please keep the book <strong>on the table.</strong><br>புத்தகத்தை மேசையில் வைத்துக் கொள்ளவும்.</li>
+                                    <li>I like to sit <strong>on the floor.</strong></li>
+                                </ul>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="prep-title">Preposition of Time – AT</div>
+                    <table class="prep-table">
+                        <thead>
+                        <tr>
+                            <th>பயன்பாடுகள் (Usage)</th>
+                            <th>உதாரணங்கள் (Examples)</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <strong>at + Hours</strong><br>
+                                at 7 am<br>
+                                at 12 o'clock
+                            </td>
+                            <td>
+                                <ul>
+                                    <li>The class begins <strong>at 9 am.</strong><br>வகுப்பு காலை 9 மணிக்கு தொடங்குகிறது.</li>
+                                    <li>We will meet you today <strong>at 6 o'clock.</strong></li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>at + Parts of the day</strong><br>
+                                at night<br>
+                                at noon / midday<br>
+                                at midnight
+                            </td>
+                            <td>
+                                <ul>
+                                    <li>He came home very late <strong>at night.</strong><br>அவர் இரவு மிகவும் தாமதமாக வீட்டுக்கு வந்தார்.</li>
+                                    <li>I heard a sound <strong>at the midnight.</strong></li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>at + Time</strong><br>
+                                at present<br>
+                                at the weekend<br>
+                                at breakfast<br>
+                                at the moment
+                            </td>
+                            <td>
+                                <ul>
+                                    <li>I am busy <strong>at the moment.</strong><br>தற்போது நான் வேலைபாயாக இருக்கிறேன்.</li>
+                                    <li><strong>At present</strong> I don&apos;t have any plans for travel.</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="prep-title">Preposition of Place – AT</div>
+                    <table class="prep-table">
+                        <thead>
+                        <tr>
+                            <th>பயன்பாடுகள் (Usage)</th>
+                            <th>உதாரணங்கள் (Examples)</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <strong>at + Exact Addresses or Intersections</strong><br>
+                                at 23, Richie Street<br>
+                                at 4th cross street
+                            </td>
+                            <td>
+                                <ul>
+                                    <li>My house is <strong>at 4th Cross Street.</strong><br>எனது வீடு 4வது குறுக்குத் தெருவில் உள்ளது.</li>
+                                    <li>He stays <strong>at Richie Street.</strong></li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>at + Specific Locations / Points</strong><br>
+                                at Fun mall<br>
+                                at the corner<br>
+                                at the bus stop
+                            </td>
+                            <td>
+                                <ul>
+                                    <li>There is a shop <strong>at the corner</strong> of this street.<br>இந்தத் தெருவின் மூலையில் ஒரு கடை உள்ளது.</li>
+                                    <li>I will be waiting for you <strong>at the bus stop</strong> tomorrow.</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="prep-title">Exceptions – Prepositions of Time</div>
+                    <table class="prep-table">
+                        <thead>
+                        <tr>
+                            <th>Rule / Exception</th>
+                            <th>Examples</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <strong>Do NOT use in/on with:</strong><br>
+                                yesterday, tomorrow, this, last, next
+                            </td>
+                            <td>
+                                <ul>
+                                    <li>I have a meeting <strong>on tomorrow ❌</strong></li>
+                                    <li>I have a meeting <strong>tomorrow ✔️</strong></li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>Do NOT use AT, IN, ON with:</strong><br>
+                                every, this
+                            </td>
+                            <td>
+                                <ul>
+                                    <li>I go home <strong>at every Easter ❌</strong></li>
+                                    <li>I go home <strong>every Easter ✔️</strong></li>
+                                    <li>We will call you <strong>in this evening ❌</strong></li>
+                                    <li>We will call you <strong>this evening ✔️</strong></li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Use “at night”</strong></td>
+                            <td>
+                                <ul>
+                                    <li>In the night ❌ or at night ✔️</li>
+                                    <li>I will call you <strong>at night ✔️</strong></li>
+                                </ul>
+                                <p><strong>Note:</strong><br>
+                                    <em>In the night</em> usually refers to one particular night.<br>
+                                    <em>At night</em> refers to any night in general.</p>
+                                <p><strong>Example:</strong> I was awake <strong>in the night</strong> playing video games.</p>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p class="tamil" style="margin-top:12px;">
+                    இந்த Day 4 audio / video clips-ஐ கேட்டு, நீங்கள் கற்றிருக்கும் grammar points-ஐ
+                    repeat செய்து practice செய்யுங்கள்.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <div class="footer-note">
+        English notes and audio references based on your document.
+        Place all audio/video files inside: <code>main/audios/</code>
+        and this page inside: <code>main/html/index.html</code>.
+    </div>
+</div>
+
+<script>
+
+    
+    // Expand / collapse for each day
+    document.querySelectorAll('.lesson').forEach(function (section) {
+        const button = section.querySelector('.lesson-toggle');
+        const content = section.querySelector('.lesson-content');
+        if (!button || !content) return;
+
+        button.addEventListener('click', function () {
+            const isCollapsed = section.classList.toggle('collapsed');
+            button.textContent = isCollapsed ? '+' : '−';
+            button.setAttribute('aria-expanded', String(!isCollapsed));
+        });
+    });
+
+    // Pause other audios when one starts playing (only one audio at a time)
+    (function () {
+        const players = Array.from(document.querySelectorAll('audio.audio-player'));
+
+        players.forEach(player => {
+            player.addEventListener('play', function () {
+                players.forEach(p => {
+                    if (p !== player && !p.paused) p.pause();
+                });
+                try { player.setAttribute('playsinline', ''); } catch (e) {}
+            });
+        });
+
+        // Make label text toggles play/pause for easier mobile tapping
+        document.querySelectorAll('.audio-item .label').forEach(lbl => {
+            lbl.style.cursor = 'pointer';
+            lbl.addEventListener('click', () => {
+                const parent = lbl.closest('.audio-item');
+                const audio = parent && parent.querySelector('audio.audio-player');
+                if (!audio) return;
+                if (audio.paused) audio.play();
+                else audio.pause();
+            });
+        });
+    })();
+
+    (function () {
+  // Pause others when one plays
+  const players = Array.from(document.querySelectorAll('audio-status.audio-player'));
+
+  players.forEach(player => {
+    // When user hits play, pause others
+    player.addEventListener('play', () => {
+      players.forEach(p => { if (p !== player && !p.paused) p.pause(); });
+    });
+
+    // Try to detect whether the src is a playable audio file.
+    // Two events we use: loadedmetadata and error.
+    const statusSpan = player.closest('.audio-item').querySelector('.audio-status');
+
+    // Helper to mark failed playback (Drive served HTML or blocked)
+    function markUnplayable(reason) {
+      // disable controls so user doesn't keep seeing 0:00
+      player.controls = false;
+      player.setAttribute('aria-disabled', 'true');
+      if (statusSpan) statusSpan.textContent = 'Audio unavailable — open in Drive';
+    }
+
+    // On metadata loaded, check if duration looks valid.
+    player.addEventListener('loadedmetadata', function () {
+      // Some browsers/drive combinations still report 0:00; treat <1 second (or NaN/0) as failure
+      const d = player.duration;
+      if (!isFinite(d) || d < 0.9) {
+        // Probably not getting a real audio stream (Drive returned HTML)
+        markUnplayable('no-duration');
+      } else {
+        if (statusSpan) statusSpan.textContent = ''; // ok
+      }
+    });
+
+    // Also watch for error event
+    player.addEventListener('error', function (e) {
+      // Show fallback
+      markUnplayable('error');
+      console.warn('Audio load error for', player.src, e);
+    });
+
+    // Extra: if after a short timeout still no metadata loaded, treat as failure
+    const timeoutMs = 4000;
+    let metadataLoaded = false;
+    player.addEventListener('loadedmetadata', () => metadataLoaded = true);
+    setTimeout(() => {
+      if (!metadataLoaded) {
+        // no metadata within timeout — Drive probably sent a HTML page or blocked
+        markUnplayable('timeout');
+      }
+    }, timeoutMs);
+  });
+
+  // Optional: clicking the "label" toggles play/pause (mobile-friendly)
+  document.querySelectorAll('.audio-item .label').forEach(lbl => {
+    lbl.style.cursor = 'pointer';
+    lbl.addEventListener('click', () => {
+      const audio = lbl.closest('.audio-item').querySelector('audio.audio-player');
+      if (!audio) return;
+      if (audio.paused) audio.play(); else audio.pause();
+    });
+  });
+})();
+</script>
+</body>
+</html>
